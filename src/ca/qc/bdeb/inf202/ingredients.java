@@ -7,7 +7,7 @@ package ca.qc.bdeb.inf202;
 import java.util.List;
 
 /**
- * Operations sur les ingrediants
+ * Operations sur les ingredients
  * @author Martin Grégoire
  */
 public class ingredients {
@@ -15,13 +15,36 @@ public class ingredients {
      * Contient la liste d'ingrédients.
      * 
      */
-    static List ingredients;
+    List<String> ingredients;
     /**
-     * "prend" une quantite d'un ingredient.
+     * cree une liste d'ingrédients à partir du fichier
+     * @param cheminfichier chemin du fichier donnant la liste des ingédients
+     */
+    public ingredients(String cheminFichier){
+        ingredients=getListe(cheminFichier);
+    }
+    /**
+     * "prend" une quantite d'un ingredient et la met à jour.
      * @param ingredient L'ingrédient à manipuler.
      * @param quantite La quantite a retirer.
      */
     public void setQuantite(String ingredient,int quantite) {
         
+    }
+    /**
+     * retourne le contenu du fichier qui contient la liste des ingrédients
+     * @param cheminFichier chemin du fichier donnant la liste des ingédients
+     */
+    protected List getListe(String cheminFichier){
+        return null;
+    }
+/**
+ * retourne la quantite selon le choix
+ * @param ingredient l'ingredient à regarder
+ * @param choix 0=inventaire,1=minimu,2=renouvelement
+ * @return 
+ */
+    public int getQuantite(String ingredient,int choix){
+        return 0;
     }
 }

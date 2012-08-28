@@ -9,5 +9,27 @@ package ca.qc.bdeb.inf202;
  * @author D
  */
 public class TVQ {
+    /**
+     * numero de la tvq
+     */
+    static protected String numero="0987654321";
+    /**
+     * valeur de le tvq de type double
+     */
+    static protected double valeur=0;
     
+    /**
+     * 
+     * retourne le numero de la tvq
+     */
+    public static String getNumero(){
+        return numero;
+    }
+    /**
+     * Retourne la valeur de la tvq
+     * 
+     */
+    public static double getValeur(){
+        return valeur;
+    }
 }

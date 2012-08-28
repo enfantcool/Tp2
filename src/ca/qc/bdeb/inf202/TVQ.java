@@ -5,8 +5,8 @@
 package ca.qc.bdeb.inf202;
 
 /**
- *
- * @author D
+ * Opérations sur la tvQ
+ * @author Martin Grégoire
  */
 public class TVQ {
     /**

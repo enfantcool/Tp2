@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ca.qc.bdeb.inf202;
 
 /**
- *
- * @author Usager
+ * opérations reliées à la lecture/écriture de fichiers
+ * @author Martin Grégoire
  */
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

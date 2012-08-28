@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.inf202;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,10 +18,11 @@ public class Menu {
      * tableau 2d qui contient le menu, commencant par le nom de l'item et par
      * les ingrédients et le prix dans laa deuxieme dimension
      */
-    protected String[] menu;
+    protected HashMap<String,String> menu;
+    protected HashMap<String,Double> prix;
 
     /**
-     * Met le menu sous forme de liste à partir du fichier
+     * Met le menu sous forme de table de hashage dont la clé est le bnom de litem et la valeur étant la liste des ingrédients + le prix
      *
      * @param cheminfichier chemin du fichier donnant le menu
      */
@@ -31,7 +33,7 @@ public class Menu {
     }
 
     /**
-     *
+     * Transforme la liste pour la mettre dans la table de hashage
      * @param cheminFichier chemin du fichier qui contient le menu
      * @return le fichier
      */
@@ -43,5 +45,8 @@ public class Menu {
      * remet la liste venant du fichier en tableau 2d de type String
      */
     protected void triListe() {
+    }
+    public double getPrix(String nomitem,int quantite){
+        return 0;
     }
 }

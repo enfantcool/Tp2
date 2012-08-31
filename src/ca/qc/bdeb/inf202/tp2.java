@@ -1,6 +1,9 @@
 
 package ca.qc.bdeb.inf202;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * D'abord, à l'ouverture, le programme charge les fichiers, effectue le renouvellement de son inventaire, et est prêt à être utilisé.
  * Ensuite, il demande à l'utilisateur ce qu'il veut faire. Si l'utilisateur veut faire une commande, alors le programme lui demande quels items, et en quelle quantite, 
@@ -29,7 +32,13 @@ public class tp2 {
 
   //Code d'ouverture
     public static void main(String[] args) {
+        String[] temp;
+        temp=Fichiers.toString("ingredients.txt");
         
+        for (int i = 0; i < temp.length; i++) {
+            System.out.println(temp[i]);
+            
+        }
     }
     /**
      * chargement des fichiers, attributtion des fiuchiers aux variables tels qu'ingrédients, menus...

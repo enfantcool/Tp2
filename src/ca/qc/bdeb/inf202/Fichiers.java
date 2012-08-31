@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Gestion Des fichiers(Écriture/Lecture)
@@ -25,24 +27,26 @@ public class Fichiers {//classe qui sert a charger ou sauvegarder un fichier
      * @param fileName nom du fichier à lire
      * @return File ou rien si le fichier est vide
      */
-    public static String[] readFile(String fileName) {//lit le fichier
+    public static List<String> readFile(String fileName) {//lit le fichier
 
-        int i = longueur(fileName);
-        if (i != -1) {
+
             /**
              * Contient les données du fichier
              */
-            String fiche[];
-            fiche = new String[i];
+            List<String> fiche;
+            String temp;
+            
+            fiche= new ArrayList<String>();
             try {
                 /**
                  * Permet la lecture du fichier
                  */
                 BufferedReader Fichelect = new BufferedReader(new FileReader(fileName));
-
-                i = 1;
-                while (i <= fiche.length && (fiche[i - 1] = Fichelect.readLine()) != null) {
-                    i++;
+                
+                temp=Fichelect.readLine();
+                while (temp!=null) {
+                    fiche.add(temp);
+                    temp=Fichelect.readLine();
                 }
                 Fichelect.close();
 
@@ -54,8 +58,7 @@ public class Fichiers {//classe qui sert a charger ou sauvegarder un fichier
 
 
             return fiche;
-        }
-        return null;
+
     }
 
     /**
@@ -86,6 +89,16 @@ public class Fichiers {//classe qui sert a charger ou sauvegarder un fichier
      * @param filePath
      * @throws FileNotFoundException
      */
+    public static String[] toString(String nomfichier){
+       String[] temp;
+       List<String> fichier;
+       fichier=new ArrayList<String>();
+       fichier=readFile(nomfichier);
+       temp=new String[fichier.size()];
+       temp=fichier.toArray(temp);
+        return temp;
+                
+    }
     public static void writeFile(String[] file, String filePath) throws FileNotFoundException {//ecrit le contenu du String[] dans un fichier
         PrintWriter source = new PrintWriter(new FileOutputStream(filePath));
         for (int i = 0; i < file.length; i++) {

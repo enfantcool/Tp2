@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.inf202;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class ingredients {
      * @param cheminfichier chemin du fichier donnant la liste des ingédients
      */
     public ingredients(String cheminFichier) {
+        ingredients=new ArrayList<String>();
         ingredients = getListe(cheminFichier);
     }
 
@@ -35,6 +37,7 @@ public class ingredients {
      * @param quantite La quantite a retirer.
      */
     public void setQuantite(String ingredient, int quantite) {
+        
     }
 
     /**
@@ -43,7 +46,10 @@ public class ingredients {
      * @param cheminFichier chemin du fichier donnant la liste des ingédients
      */
     protected List getListe(String cheminFichier) {
-        return null;
+        List<String> temp;
+        temp=new ArrayList<String>();
+        temp=Fichiers.readFile("ingredients.txt");
+        return temp;
     }
 
     /**

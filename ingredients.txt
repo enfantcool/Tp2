@@ -1,0 +1,14 @@
+pain hot-dog;20;12;120
+pain hamburger;50;24;120
+saucisse hot-dog;20;10;100
+boulette hamburger;20;10;100
+fromage tranche;48;24;96
+fromage grain;50;20;100
+ketchup;1500;1000;1000
+moutarde;1500;1000;1000
+relish;1500;1000;1000
+oignons haches;1000;1000;1000
+cornichon;200;100;500
+frites;2000;1000;5000
+salade chou;1000;750;5000
+sauce brune;1000;750;5000

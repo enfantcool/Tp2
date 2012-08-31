@@ -19,6 +19,9 @@ public class Menu {
      * les ingrédients et le prix dans laa deuxieme dimension
      */
     protected HashMap<String,String> menu;
+    /**
+     * table de hashage contenant les prix des items
+     */
     protected HashMap<String,Double> prix;
 
     /**
@@ -46,6 +49,12 @@ public class Menu {
      */
     protected void triListe() {
     }
+    /**
+     * cherche le prix dun item
+     * @param nomitem nom de litem
+     * @param quantite quantite
+     * @return prix
+     */
     public double getPrix(String nomitem,int quantite){
         return 0;
     }

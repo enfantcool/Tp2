@@ -16,17 +16,47 @@ public class Facture {
 
     List<String> facture;
     HashMap<String, Double> prix;
-
+/**
+ * valeur de la tps
+ * @return 
+ */
     public static int getTps() {
         return 0;
     }
-
+/**
+ * valeur de la tvq
+ * @return 
+ */
     public static int getTvq() {
         return 0;
     }
-    public static void setPrix(double cout){
+    /**
+     * date du jour
+     */
+    public static void getDate(){
+        
+    }
+    /**
+     * calcul du cout total
+     * @return 
+     */
+    public static double calculCout(){
+        return 0;
+    }
+    /**
+     * ajuster le prix dun item dans la facture
+     * @param nomitem nom de litem
+     * @param cout cout de litem
+     */
+    public static void setPrix(String nomitem,double cout){
     //ajout prix a la cle dans la hashmap
     }
+    /**
+     * Chercher le prix dun item
+     * @param nomitem nom de litem
+     * @param quantite 
+     */
+ 
     public static void getPrix(String nomitem,int quantite) {
     }
 
@@ -35,7 +65,17 @@ public class Facture {
      */
     public void setNumero() {
     }
-
+    /**
+     * cherche le dernier numero de facture
+     */
+    public void getNumero(){
+        
+    }
+            
+/**
+ * Produit la facture et l'enregistre dans un fichier
+ * @param facture 
+ */
     protected void writeFacture(List facture) {
     }
 }

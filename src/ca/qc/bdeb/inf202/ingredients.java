@@ -4,10 +4,7 @@
  */
 package ca.qc.bdeb.inf202;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * Operations sur les ingredients
@@ -20,7 +17,8 @@ public class ingredients {
      * Contient la liste d'ingrédients.
      *
      */
-    private HashMap<String,List<String>> ingredients;
+    private HashMap<String, List<String>> ingredients;
+    private List<String> liste;
 
     /**
      * cree une liste d'ingrédients à partir du fichier
@@ -28,20 +26,30 @@ public class ingredients {
      * @param cheminfichier chemin du fichier donnant la liste des ingédients
      */
     public ingredients(String cheminFichier) {
-        List<String> temp= getListe(cheminFichier);
-        ingredients=new HashMap<String,List<String>>();
+        List<String> temp = getListe(cheminFichier);
+        ingredients = new HashMap<String, List<String>>();
         for (int i = 0; i < temp.size(); i++) {
-            List<String> list=new ArrayList<String>();
-            StringTokenizer decoupe=new StringTokenizer(temp.get(i),";");
-            while(decoupe.hasMoreTokens()){
+            List<String> list = new ArrayList<String>();
+            StringTokenizer decoupe = new StringTokenizer(temp.get(i), ";");
+            while (decoupe.hasMoreTokens()) {
                 list.add(decoupe.nextToken());
             }
-            String premier=list.get(0);
+            String premier = list.get(0);
             list.remove(0);
-            ingredients.put(premier,list);
+            ingredients.put(premier, list);
         }
-        
- 
+        liste = new ArrayList<String>();
+        for (String cle : ingredients.keySet()) {
+            liste.add(cle);
+        }
+
+    }
+/**
+ * Retourne la liste de noms des ingrédients
+ * @return la liste de noms
+ */
+    public List getNoms() {
+        return liste;
     }
 
     /**
@@ -51,7 +59,10 @@ public class ingredients {
      * @param quantite La quantite a retirer.
      */
     public void setQuantite(String ingredient, int quantite) {
-        
+        List<String> temp = new ArrayList<String>();
+        temp = ingredients.get(ingredient);
+        temp.set(0, String.valueOf(quantite));
+        ingredients.put(ingredient, temp);
     }
 
     /**
@@ -61,8 +72,8 @@ public class ingredients {
      */
     protected List getListe(String cheminFichier) {
         List<String> temp;
-        temp=new ArrayList<String>();
-        temp=Fichiers.readFile("ingredients.txt");
+        temp = new ArrayList<String>();
+        temp = Fichiers.readFile("ingredients.txt");
         return temp;
     }
 

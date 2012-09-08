@@ -41,6 +41,16 @@ public class tp2 {
         }
         System.out.println("------------------");
         ingredients temp2=new ingredients("ingredients.txt");
+        temp2.setQuantite("frites",1000);
+        System.out.println(temp2.getQuantite("frites",0));
+        System.out.println("---------------");
+        List<String> temp3;
+        temp3=temp2.getNoms();
+        for (int i = 0; i < temp3.size(); i++) {
+            System.out.println(temp3.get(i));
+            
+        }
+ 
     }
     /**
      * chargement des fichiers, attributtion des fiuchiers aux variables tels qu'ingrédients, menus...

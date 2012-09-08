@@ -5,7 +5,9 @@
 package ca.qc.bdeb.inf202;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Operations sur les ingredients
@@ -18,7 +20,7 @@ public class ingredients {
      * Contient la liste d'ingrédients.
      *
      */
-    List<String> ingredients;
+    private HashMap<String,List<String>> ingredients;
 
     /**
      * cree une liste d'ingrédients à partir du fichier
@@ -26,8 +28,20 @@ public class ingredients {
      * @param cheminfichier chemin du fichier donnant la liste des ingédients
      */
     public ingredients(String cheminFichier) {
-        ingredients=new ArrayList<String>();
-        ingredients = getListe(cheminFichier);
+        List<String> temp= getListe(cheminFichier);
+        ingredients=new HashMap<String,List<String>>();
+        for (int i = 0; i < temp.size(); i++) {
+            List<String> list=new ArrayList<String>();
+            StringTokenizer decoupe=new StringTokenizer(temp.get(i),";");
+            while(decoupe.hasMoreTokens()){
+                list.add(decoupe.nextToken());
+            }
+            String premier=list.get(0);
+            list.remove(0);
+            ingredients.put(premier,list);
+        }
+        
+ 
     }
 
     /**
@@ -60,6 +74,6 @@ public class ingredients {
      * @return
      */
     public int getQuantite(String ingredient, int choix) {
-        return 0;
+        return Integer.parseInt(ingredients.get(ingredient).get(choix));
     }
 }

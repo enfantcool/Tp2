@@ -39,6 +39,8 @@ public class tp2 {
             System.out.println(temp[i]);
             
         }
+        System.out.println("------------------");
+        ingredients temp2=new ingredients("ingredients.txt");
     }
     /**
      * chargement des fichiers, attributtion des fiuchiers aux variables tels qu'ingrédients, menus...

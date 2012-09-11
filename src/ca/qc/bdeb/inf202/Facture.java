@@ -17,7 +17,7 @@ public class Facture {
 
     List<String> facture;
     HashMap<String, Double> prix;
-    HashMap<String,Double> liste;
+    HashMap<String, Double> liste;
 /**
  * valeur de la tps
  * @return 
@@ -26,11 +26,15 @@ public class Facture {
         return 0;
     }
     public Facture(Commande commande){
+        setCommande(commande);
+        setPrix();
+        Double sousTotal=sousTotal();
         facture=new ArrayList<>();
         for(String nom:prix.keySet()){
             facture.add("- "+nom+" Prix: "+(prix.get(nom)*liste.get(nom)));
             facture.add("Quantité: "+liste.get(nom));
         }
+        facture.add(sousTotal.toString());
     }
 public void setCommande(Commande commande){
     liste=commande.getCommande();
@@ -52,15 +56,23 @@ public void setCommande(Commande commande){
      * calcul du cout total
      * @return 
      */
-    public static double calculCout(){
-        return 0;
+    public  double calculCout(){
+        
+        return (sousTotal()*getTps()*getTvq());
+    }
+    public  double sousTotal(){
+        double tempTotal=0;
+        for(String nom:liste.keySet()){
+            tempTotal=tempTotal+getPrix(nom);
+        }
+        return tempTotal;
     }
     /**
      * ajuster le prix dun item dans la facture
      * @param nomitem nom de litem
      * @param cout cout de litem
      */
-    public void setPrix(String nomitem,double cout){
+    public void setPrix(){
         for (String nom:liste.keySet())
         {
             prix.put(nom,getPrix(nom)*liste.get(nom));
@@ -74,6 +86,9 @@ public void setCommande(Commande commande){
  
     public  Double getPrix(String nomitem) {
         return Items.getPrix(nomitem);
+    }
+        public  Double getPrix(String nomitem,Double quantite) {
+        return Items.getPrix(nomitem,quantite);
     }
 
     /**

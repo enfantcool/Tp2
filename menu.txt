@@ -1,4 +1,4 @@
-hot-dog
+Hot-dog
 pain hot-dog;1
 saucisse hot-dog;1
 ketchup;30

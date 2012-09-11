@@ -14,10 +14,14 @@ import java.util.*;
 public class Menu {
 
     /**
-     * tableau 2d qui contient le menu, commencant par le nom de l'item et par
-     * les ingrédients et le prix dans laa deuxieme dimension
+     * hashmap contenant le nom d'un item, ses ingrédients et leur quantité.
+     * 
      */
     protected HashMap<String, HashMap<String, String>> menu;
+    /**
+     * hashmap contenant la liste d'ingrédients pour produire chaque item
+     */
+    protected HashMap<String,Set<String>> listeIngredients;
     /**
      * Listes des items pouvant être commandés
      */
@@ -29,20 +33,20 @@ public class Menu {
 
     /**
      * Met le menu sous forme de table de hashage dont la clé est le bnom de
-     * litem et la valeur étant la liste des ingrédients + le prix
+     * l'item et la valeur étant la liste des ingrédients + le prix
      *
      * @param cheminfichier chemin du fichier donnant le menu
      */
     public Menu(String cheminFichier) {
         List<String> temp;
-        items = new ArrayList<String>();
-        prix = new HashMap<String, String>();
-        menu = new HashMap<String, HashMap<String, String>>();
+        items = new ArrayList<>();
+        prix = new HashMap<>();
+        menu = new HashMap<>();
+        listeIngredients=new HashMap<>();
         temp = getListe(cheminFichier);
         triListe(temp);
-        for (String out : items) {
-            System.out.println(out);
-        }
+        setListeIngredients();
+        Items.setPrix(prix);
 
     }
 
@@ -52,7 +56,7 @@ public class Menu {
      * @param cheminFichier chemin du fichier qui contient le menu
      * @return le fichier
      */
-    protected List getListe(String cheminFichier) {
+    protected final List getListe(String cheminFichier) {
 
         return Fichiers.readFile(cheminFichier);
     }
@@ -61,7 +65,7 @@ public class Menu {
      * sépare la liste dans une liste contenant les noms des items et dans une
      * HashMap contenant le prix des items.
      */
-    protected void triListe(List<String> parcours) {
+    protected final void triListe(List<String> parcours) {
         String dernierItem = "";
         HashMap<String, String> table = new HashMap<String, String>();
         for (int i = 0; i < parcours.size(); i++) {
@@ -75,12 +79,7 @@ public class Menu {
 
 
                 prix.put(dernierItem, parcours.get(i));
-                System.out.println(dernierItem);
-                for (String out:table.keySet()) {
-                    System.out.println(out+";"+table.get(out)+"----------");
-                }
                 menu.put(dernierItem, table);
-                System.out.println(menu.get(dernierItem).get("ketchup")+"88888888888");
                 table = new HashMap<String, String>();
             } else {
                 List<String> list = new ArrayList<String>();
@@ -96,7 +95,15 @@ public class Menu {
 
         }
     }
-
+    /**
+     * Attribue une liste d'ingrédients pour chaque items
+     */
+public void setListeIngredients(){
+    for (String nom:items)
+    {
+       listeIngredients.put(nom,menu.get(nom).keySet()); 
+    }
+}
     /**
      * cherche le prix dun item
      *
@@ -104,16 +111,20 @@ public class Menu {
      * @param quantite quantite
      * @return prix
      */
-    public double getPrix(String nomItem, int quantite) {
+    public double  getPrix(String nomItem, int quantite) {
         String temp = prix.get(nomItem);
         temp = temp.replace(',', '.');
         temp = temp.replace('$', ' ');
         temp = temp.trim();
         return (Double.parseDouble(temp) * quantite);
     }
-
-    public String getQuantite(String nomIngredient, String nomItem) {
-        System.out.println("------------000");
+/**
+ * Done la quantité d'un ingédient d'un item
+ * @param nomItem l'item à chercher
+ * @param nomIngredient l'ingrédient à chercher
+ * @return quantite de l'ingredient, en integer
+ */
+    public String getQuantite(String nomItem, String nomIngredient) {
         HashMap<String,String> table=new HashMap<String,String>();
         table=menu.get(nomItem);
         for (String out:table.keySet()) {
@@ -121,13 +132,20 @@ public class Menu {
         }
         return (menu.get(nomItem).get(nomIngredient));
     }
-
+/**
+ * à enlever lorsque fini.
+ */
     public void test() {
  
         for (String out : items) {
             System.out.println(out);
-            System.out.println(getPrix(out, 1));
+            System.out.println("------");
+            for (String nom:listeIngredients.get(out))
+            {
+                System.out.println(nom);
+            }
+            System.out.println("----------");
         }
-        System.out.println(getQuantite("frites","Frite"));
+        System.out.println(getQuantite("Frite","frites"));
     }
 }

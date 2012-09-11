@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.inf202;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class Facture {
 
     List<String> facture;
     HashMap<String, Double> prix;
+    HashMap<String,Double> liste;
 /**
  * valeur de la tps
  * @return 
@@ -23,6 +25,16 @@ public class Facture {
     public static int getTps() {
         return 0;
     }
+    public Facture(Commande commande){
+        facture=new ArrayList<>();
+        for(String nom:prix.keySet()){
+            facture.add("- "+nom+" Prix: "+(prix.get(nom)*liste.get(nom)));
+            facture.add("Quantité: "+liste.get(nom));
+        }
+    }
+public void setCommande(Commande commande){
+    liste=commande.getCommande();
+}
 /**
  * valeur de la tvq
  * @return 
@@ -48,8 +60,11 @@ public class Facture {
      * @param nomitem nom de litem
      * @param cout cout de litem
      */
-    public static void setPrix(String nomitem,double cout){
-    //ajout prix a la cle dans la hashmap
+    public void setPrix(String nomitem,double cout){
+        for (String nom:liste.keySet())
+        {
+            prix.put(nom,getPrix(nom)*liste.get(nom));
+        }
     }
     /**
      * Chercher le prix dun item
@@ -57,7 +72,8 @@ public class Facture {
      * @param quantite 
      */
  
-    public static void getPrix(String nomitem,int quantite) {
+    public  Double getPrix(String nomitem) {
+        return Items.getPrix(nomitem);
     }
 
     /**

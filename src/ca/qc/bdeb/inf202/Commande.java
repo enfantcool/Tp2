@@ -21,8 +21,23 @@ public class Commande {
      * ajout un item a la commande
      * @param nomitem nom de litem a ajouter
      */
-    public void ajoutItem(String nomitem){
+    public Commande(){
+        commande=new HashMap<>();
+    }
+    public void ajoutItem(String nomItem){
         //if containskey(nomitem) then commande.put(nomitem,commande.get(nomitem)+1)
+        if (commande.containsKey(nomItem)){
+            commande.put(nomItem,commande.get(nomItem)+1);
+        }
+        else
+        commande.put(nomItem,1.00);
+    }
+    public void ajoutItem(String nomItem,Double quantite){
+        if (commande.containsKey(nomItem)){
+            commande.put(nomItem,commande.get(nomItem)+quantite);
+        }
+        else
+        commande.put(nomItem,quantite);
     }
     /**
      * Reduit els ingredients dans l'inventaire et produit un facture
@@ -30,6 +45,9 @@ public class Commande {
     public void traiterCommande(){
         //for(1 à quantite d'un item) reduire la quantite dingredients dans linventaire par item
         //envoyer a la facture
+    }
+        public HashMap<String,Double> getCommande(){
+        return commande;
     }
 }
 

@@ -11,7 +11,8 @@ import java.util.*;
  *
  * @author Martin Grégoire
  */
-public class ingredients {
+public class ingredients
+{
 
     /**
      * Contient la liste d'ingrédients.
@@ -25,13 +26,16 @@ public class ingredients {
      *
      * @param cheminfichier chemin du fichier donnant la liste des ingédients
      */
-    public ingredients(String cheminFichier) {
+    public ingredients(String cheminFichier)
+    {
         List<String> temp = getListe(cheminFichier);
         ingredients = new HashMap<String, List<String>>();
-        for (int i = 0; i < temp.size(); i++) {
+        for (int i = 0; i < temp.size(); i++)
+        {
             List<String> list = new ArrayList<String>();
             StringTokenizer decoupe = new StringTokenizer(temp.get(i), ";");
-            while (decoupe.hasMoreTokens()) {
+            while (decoupe.hasMoreTokens())
+            {
                 list.add(decoupe.nextToken());
             }
             String premier = list.get(0);
@@ -39,16 +43,20 @@ public class ingredients {
             ingredients.put(premier, list);
         }
         liste = new ArrayList<String>();
-        for (String cle : ingredients.keySet()) {
+        for (String cle : ingredients.keySet())
+        {
             liste.add(cle);
         }
 
     }
-/**
- * Retourne la liste de noms des ingrédients
- * @return la liste de noms
- */
-    public List getNoms() {
+
+    /**
+     * Retourne la liste de noms des ingrédients
+     *
+     * @return la liste de noms
+     */
+    public List getNoms()
+    {
         return liste;
     }
 
@@ -58,7 +66,8 @@ public class ingredients {
      * @param ingredient L'ingrédient à manipuler.
      * @param quantite La quantite a retirer.
      */
-    public void setQuantite(String ingredient, int quantite) {
+    public void setQuantite(String ingredient, int quantite)
+    {
         List<String> temp = new ArrayList<String>();
         temp = ingredients.get(ingredient);
         temp.set(0, String.valueOf(quantite));
@@ -70,7 +79,8 @@ public class ingredients {
      *
      * @param cheminFichier chemin du fichier donnant la liste des ingédients
      */
-    protected List getListe(String cheminFichier) {
+    protected List getListe(String cheminFichier)
+    {
         List<String> temp;
         temp = new ArrayList<String>();
         temp = Fichiers.readFile("ingredients.txt");
@@ -84,7 +94,8 @@ public class ingredients {
      * @param choix 0=inventaire,1=minimu,2=renouvelement
      * @return
      */
-    public int getQuantite(String ingredient, int choix) {
+    public int getQuantite(String ingredient, int choix)
+    {
         return Integer.parseInt(ingredients.get(ingredient).get(choix));
     }
 }

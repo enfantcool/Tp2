@@ -30,15 +30,18 @@ import java.util.List;
  *
  * @author Martin Grégoire
  */
-public class tp2 {
+public class tp2
+{
 
     //Code d'ouverture
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
         String[] temp;
         temp = Fichiers.toString("ingredients.txt");
 
-        for (int i = 0; i < temp.length; i++) {
+        for (int i = 0; i < temp.length; i++)
+        {
             System.out.println(temp[i]);
 
         }
@@ -49,7 +52,8 @@ public class tp2 {
         System.out.println("---------------");
         List<String> temp3;
         temp3 = temp2.getNoms();
-        for (int i = 0; i < temp3.size(); i++) {
+        for (int i = 0; i < temp3.size(); i++)
+        {
             System.out.println(temp3.get(i));
 
         }
@@ -58,13 +62,14 @@ public class tp2 {
         System.out.println("-------------");
         blabla.test();
         System.out.println("---------");
-        
+
     }
 
     /**
      * chargement des fichiers, attributtion des fiuchiers aux variables tels
      * qu'ingrédients, menus...
      */
-    public static void ouverture() {
+    public static void ouverture()
+    {
     }
 }

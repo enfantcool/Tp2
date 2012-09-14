@@ -12,23 +12,29 @@ import java.util.HashMap;
  */
 public class Items
 {
-    private static HashMap<String,String> prix;
-    
-    public static Double getPrix(String nomItem){
-         String temp = prix.get(nomItem);
+
+    private static HashMap<String, String> prix;
+
+    public static Double getPrix(String nomItem)
+    {
+        String temp = prix.get(nomItem);
         temp = temp.replace(',', '.');
         temp = temp.replace('$', ' ');
         temp = temp.trim();
         return (Double.parseDouble(temp));
     }
-        public static Double getPrix(String nomItem,Double quantite){
-         String temp = prix.get(nomItem);
+
+    public static Double getPrix(String nomItem, Double quantite)
+    {
+        String temp = prix.get(nomItem);
         temp = temp.replace(',', '.');
         temp = temp.replace('$', ' ');
         temp = temp.trim();
-        return (Double.parseDouble(temp)*quantite);
+        return (Double.parseDouble(temp) * quantite);
     }
-    public static void setPrix(HashMap<String,String> liste){
-        prix=liste;
+
+    public static void setPrix(HashMap<String, String> liste)
+    {
+        prix = liste;
     }
 }

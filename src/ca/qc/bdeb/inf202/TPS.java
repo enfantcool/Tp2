@@ -9,7 +9,8 @@ package ca.qc.bdeb.inf202;
  *
  * @author Martin Gregoire
  */
-public class TPS {
+public class TPS
+{
 
     /**
      * numero de la tps
@@ -18,13 +19,14 @@ public class TPS {
     /**
      * valeur de le tps de type double
      */
-    static protected double valeur = 0;
+    static protected double valeur = 0.05;
 
     /**
      *
      * retourne le numero de la tps
      */
-    public static String getNumero() {
+    static public String getNumero()
+    {
         return numero;
     }
 
@@ -32,7 +34,8 @@ public class TPS {
      * Retourne la valeur de la tps
      *
      */
-    public static double getValeur() {
+    static public double getValeur()
+    {
         return valeur;
     }
 }

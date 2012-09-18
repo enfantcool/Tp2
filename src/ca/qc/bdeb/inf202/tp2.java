@@ -46,7 +46,7 @@ public class tp2
 
         }
         System.out.println("------------------");
-        ingredients temp2 = new ingredients("ingredients.txt");
+        Ingredients temp2 = new Ingredients("ingredients.txt");
         temp2.setQuantite("frites", 1000);
         System.out.println(temp2.getQuantite("frites", 0));
         System.out.println("---------------");
@@ -58,10 +58,13 @@ public class tp2
 
         }
         System.out.println("-----------");
-        Menu blabla = new Menu("menu.txt");
+        Menu blabla = new Menu("menu.txt",temp2);
         System.out.println("-------------");
         blabla.test();
         System.out.println("---------");
+        Choix.setIngredients(temp2);
+        Choix.setMenu(blabla);
+        Choix.getChoix();
 
     }
 
@@ -72,4 +75,5 @@ public class tp2
     public static void ouverture()
     {
     }
+   
 }

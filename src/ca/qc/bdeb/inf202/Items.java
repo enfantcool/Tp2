@@ -4,7 +4,10 @@
  */
 package ca.qc.bdeb.inf202;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -13,9 +16,10 @@ import java.util.HashMap;
 public class Items
 {
 
-    private static HashMap<String, String> prix;
+    private  static HashMap<String, String> prix;
+    private  static List<String> noms;
 
-    public static Double getPrix(String nomItem)
+    public  static Double getPrix(String nomItem)
     {
         String temp = prix.get(nomItem);
         temp = temp.replace(',', '.');
@@ -33,8 +37,18 @@ public class Items
         return (Double.parseDouble(temp) * quantite);
     }
 
-    public static void setPrix(HashMap<String, String> liste)
+    public static  void setPrix(HashMap<String, String> liste)
     {
         prix = liste;
+    }
+    public static void setNoms(HashMap<String, String> liste){
+        noms=new ArrayList<>();
+        for (String nom:liste.keySet())
+        {
+            noms.add(nom);
+        }
+    }
+    public static List getNoms(){
+        return noms;
     }
 }

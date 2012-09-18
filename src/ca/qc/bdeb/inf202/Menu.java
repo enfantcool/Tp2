@@ -20,7 +20,7 @@ public class Menu
      */
     protected HashMap<String, HashMap<String, String>> menu;
     /**
-     * hashmap contenant la liste d'ingrédients pour produire chaque item
+     * hashmap contenant la liste d'ingrédients pour produire chaque item<Item,Set de noms d'ingrédients>
      */
     protected HashMap<String, Set<String>> listeIngredients;
     /**
@@ -31,6 +31,7 @@ public class Menu
      * table de hashage contenant les prix des items
      */
     protected HashMap<String, String> prix;
+    protected Ingredients ingredients;
 
     /**
      * Met le menu sous forme de table de hashage dont la clé est le bnom de
@@ -38,8 +39,9 @@ public class Menu
      *
      * @param cheminfichier chemin du fichier donnant le menu
      */
-    public Menu(String cheminFichier)
+    public Menu(String cheminFichier,Ingredients ingredients)
     {
+        ingredients=ingredients;
         List<String> temp;
         items = new ArrayList<>();
         prix = new HashMap<>();
@@ -49,6 +51,7 @@ public class Menu
         triListe(temp);
         setListeIngredients();
         Items.setPrix(prix);
+        Items.setNoms(prix);
 
     }
 
@@ -141,17 +144,23 @@ public class Menu
      * @param nomIngredient l'ingrédient à chercher
      * @return quantite de l'ingredient, en integer
      */
-    public String getQuantite(String nomItem, String nomIngredient)
+    public String getInventaire(String nomItem, String nomIngredient)
     {
-        HashMap<String, String> table = new HashMap<String, String>();
-        table = menu.get(nomItem);
-        for (String out : table.keySet())
-        {
-            System.out.println(out);
-        }
         return (menu.get(nomItem).get(nomIngredient));
     }
-
+    public Boolean estProductible(String nomItem){
+        Boolean production=true;
+        for (String ingredient:listeIngredients.get(nomItem))
+        {
+            if(ingredients.getQuantite(ingredient, 1)<ingredients.getQuantite(ingredient,2)){
+                return false;
+            }
+        }
+        return true;
+    }
+public List getListe(){
+    return items;
+}
     /**
      * à enlever lorsque fini.
      */
@@ -168,6 +177,6 @@ public class Menu
             }
             System.out.println("----------");
         }
-        System.out.println(getQuantite("Frite", "frites"));
+        System.out.println(getInventaire("Frite", "frites"));
     }
 }

@@ -15,23 +15,18 @@ import java.util.List;
  */
 public class Choix
 {
-private static Ingredients ingredients;
-private static  Menu menu;
+private Ingredients ingredients;
+private Menu menu;
 
-    public static void setIngredients(Ingredients ingredients)
-    {
-        ingredients = ingredients;
-    }
-
-    public static void setMenu(Menu menu)
-    {
-        menu = menu;
-    }
+public Choix(Ingredients ingredients,Menu menu){
+    this.menu=menu;
+    this.ingredients=ingredients;
+}
     /**
      * afficher les choix du menu, prendre une commande, signaler une perte,
      * sortir une facture, quitter le porgramme
      */
-    public static void affChoix()
+    public void affChoix()
     {
         System.out.println("1- Prendre une commande;\n2- Signaler une perte;\n3- Afficher une facture;\n4- Quitter le programme.");
     }
@@ -39,7 +34,7 @@ private static  Menu menu;
     /**
      * Prendre et effectuer les actions selon les choix de l'utillisateur
      */
-    public static void getChoix()
+    public void getChoix()
     {
         String choix;
        affChoix();
@@ -59,7 +54,7 @@ private static  Menu menu;
                System.out.println("Entrez un chifre de 1 à 4 pour effectuer un choix.");
        }
     }
-    public static void getItems(){
+    public void getItems(){
         List<String>noms;
         noms=Items.getNoms();
         System.out.println("Un item avec un '#' signigie qu'il n'y a pas assez d'un ingrédient pour le produire.");
@@ -91,10 +86,38 @@ private static  Menu menu;
             return null;
         }
     }
-     public static void commande(){
+     public void commande(){
+         List items=menu.getListe();
+         String choix;
+         String choix2;
+         String nomItem;
          getItems();
+         System.out.println("Choisissez un item par son numero");
+         choix=lectureClavier();
          
+         System.out.println("Combien?");
+         choix2=lectureClavier();
          
+     }
+     public static boolean traitementClavier(String entree){
+        boolean erreur = true;
+        String choix = "";
+        while (erreur)
+        {
+            System.out.println("Il est temps de bouger.\n w:Haut; a:Gauche; s:Bas; d:Droite; q: Sortie");
+            choix = lectureClavier();
+            System.out.println("");
+            if (!(choix == null) && choix.length() == 1)
+            {
+                erreur = false;
+
+            }
+            else
+            {
+                System.out.println("Entrez une direction ou entrez q pour sortir.");
+            }
+        }
+        return choix.toLowerCase().charAt(0);
      }
      
 }

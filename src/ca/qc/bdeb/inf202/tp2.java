@@ -62,9 +62,8 @@ public class tp2
         System.out.println("-------------");
         blabla.test();
         System.out.println("---------");
-        Choix.setIngredients(temp2);
-        Choix.setMenu(blabla);
-        Choix.getChoix();
+        Choix choix=new Choix(temp2,blabla);
+        choix.getChoix();
 
     }
 

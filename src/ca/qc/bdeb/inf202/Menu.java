@@ -41,7 +41,7 @@ public class Menu
      */
     public Menu(String cheminFichier,Ingredients ingredients)
     {
-        ingredients=ingredients;
+        this.ingredients=ingredients;
         List<String> temp;
         items = new ArrayList<>();
         prix = new HashMap<>();
@@ -152,7 +152,7 @@ public class Menu
         Boolean production=true;
         for (String ingredient:listeIngredients.get(nomItem))
         {
-            if(ingredients.getQuantite(ingredient, 1)<ingredients.getQuantite(ingredient,2)){
+            if(ingredients.getQuantite(ingredient, 0)<ingredients.getQuantite(ingredient,1)){
                 return false;
             }
         }

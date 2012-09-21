@@ -7,6 +7,7 @@ package ca.qc.bdeb.inf202;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,13 +16,17 @@ import java.util.List;
  */
 public class Choix
 {
-private Ingredients ingredients;
-private Menu menu;
 
-public Choix(Ingredients ingredients,Menu menu){
-    this.menu=menu;
-    this.ingredients=ingredients;
-}
+    private Ingredients ingredients;
+    private Menu menu;
+    private HashMap<String, Boolean> commandable;
+
+    public Choix(Ingredients ingredients, Menu menu)
+    {
+        this.menu = menu;
+        this.ingredients = ingredients;
+    }
+
     /**
      * afficher les choix du menu, prendre une commande, signaler une perte,
      * sortir une facture, quitter le porgramme
@@ -37,42 +42,49 @@ public Choix(Ingredients ingredients,Menu menu){
     public void getChoix()
     {
         String choix;
-       affChoix();
-       choix=lectureClavier();
-       switch (choix){
-           case "1":
-               commande();
-               break;
-           case "2":
-               break;
-           case "3":
-               break;
-           case "4":
-               System.exit(0);
-               break;
-           default:
-               System.out.println("Entrez un chifre de 1 à 4 pour effectuer un choix.");
-       }
+        affChoix();
+        choix = lectureClavier();
+        switch (choix)
+        {
+            case "1":
+                commande();
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Entrez un chifre de 1 à 4 pour effectuer un choix.");
+        }
     }
-    public void getItems(){
-        List<String>noms;
-        noms=Items.getNoms();
+
+    public void getItems()
+    {
+        commandable = new HashMap<>();
+        List<String> noms;
+        noms = Items.getNoms();
         System.out.println("Un item avec un '#' signigie qu'il n'y a pas assez d'un ingrédient pour le produire.");
         for (int i = 0; i < noms.size(); i++)
         {
             if (menu.estProductible(noms.get(i)))
             {
-            System.out.println((i+1)+"- "+noms.get(i));
+                System.out.println((i + 1) + "- " + noms.get(i));
+                commandable.put(noms.get(i), true);
             }
             else
             {
-                System.out.println("#"+noms.get(i));
+                System.out.println("#" + noms.get(i));
+                commandable.put(noms.get(i), false);
             }
-            
+
         }
-        
+
     }
-     public static String lectureClavier()
+
+    public static String lectureClavier()
     {
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         try
@@ -86,38 +98,55 @@ public Choix(Ingredients ingredients,Menu menu){
             return null;
         }
     }
-     public void commande(){
-         List items=menu.getListe();
-         String choix;
-         String choix2;
-         String nomItem;
-         getItems();
-         System.out.println("Choisissez un item par son numero");
-         choix=lectureClavier();
-         
-         System.out.println("Combien?");
-         choix2=lectureClavier();
-         
-     }
-     public static boolean traitementClavier(String entree){
-        boolean erreur = true;
-        String choix = "";
-        while (erreur)
-        {
-            System.out.println("Il est temps de bouger.\n w:Haut; a:Gauche; s:Bas; d:Droite; q: Sortie");
-            choix = lectureClavier();
-            System.out.println("");
-            if (!(choix == null) && choix.length() == 1)
-            {
-                erreur = false;
 
-            }
-            else
-            {
-                System.out.println("Entrez une direction ou entrez q pour sortir.");
-            }
+    public void commande()
+    {
+        List items = menu.getListe();
+        String choix;
+        String choix2;
+        String nomItem;
+        getItems();
+        System.out.println("Choisissez un item par son numero");
+        choix = traitementClavier(1);
+
+        System.out.println("Combien?");
+        choix2 = traitementClavier(2);
+
+    }
+
+    public  String traitementClavier(int sequence)
+    {
+        String choix = "";
+        switch (sequence)
+        {
+            case 1:
+                boolean erreur = true;
+
+                while (erreur)
+                {
+                    choix = lectureClavier();
+                    if (!(choix == null) && choix.length() == 1 )
+                    {
+                        if(Character.isDigit(choix.charAt(0))){
+                        int num=Integer.parseInt(choix);
+                        if(commandable.get(menu.getListe().get(num)))
+                        erreur = false;
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Mauvaise entrée, ou cet item est en rupture de stock. Veuillez réessayer.");
+                    }
+                }
+                break;
+            case 2:
+                break;
+            default:
+
         }
-        return choix.toLowerCase().charAt(0);
-     }
-     
+
+
+
+        return choix;
+    }
 }
